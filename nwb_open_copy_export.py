@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Oct  9 15:31:24 2020
-
-@author: TG ProBook
-"""
-
 
 from datetime import datetime
 from dateutil.tz import tzlocal
@@ -64,7 +57,7 @@ for Loopcycle in len(List_of_series)
     print
     
 ##export ##############################################################################################
-nwbfile.add_acquisition(output_Acquisition2)
+nwbfile.add_acquisition(output_Acquisition)
 
 io30 = NWBHDF5IO(Output_Modified_NWB_file, 'w')
 io30.write(nwbfile, link_data=False)
@@ -86,7 +79,13 @@ def copy_VoltageClampSeries(input_acquisition_data, TimeSeries_name):
     ## get VC parameters, compress and write 
     rawdata = Acquisition_data.data[:]
         
-    output_Acquisition2 = pynwb.icephys.VoltageClampSeries(
+    device = nwbfile.create_device(name='Heka ITC-1600')
+    elec = nwbfile.create_icephys_electrode(name="elec0",
+                      description='a mock intracellular electrode',
+                      device=device)
+
+    
+    output_Acquisition = pynwb.icephys.VoltageClampSeries(
             name = TimeSeries_name,
             data = rawdata,
             capacitance_fast = Acquisition_data.capacitance_fast,
@@ -94,7 +93,7 @@ def copy_VoltageClampSeries(input_acquisition_data, TimeSeries_name):
             comments =  Acquisition_data.comments,
             conversion = Acquisition_data.conversion,
             description = Acquisition_data.description,
-            electrode = Acquisition_data.electrode,
+            electrode = elec,
             gain = Acquisition_data.gain,
             rate = Acquisition_data.rate,
             resistance_comp_bandwidth = Acquisition_data.resistance_comp_bandwidth,
@@ -114,7 +113,7 @@ def copy_VoltageClampSeries(input_acquisition_data, TimeSeries_name):
 
 ###################### TESTING SEGMENT ###############################################################
 
-output_Acquisition = copy_VoltageClampSeries(Acquisition_data, TimeSeries_name)
+output_Acquisition = copy_VoltageClampSeries(Acquisition_data, 'index_000')
 print(Acquisition_data)
 
 
