@@ -70,8 +70,23 @@ with NWBHDF5IO(Output_Modified_NWB_file, mode='w', manager=manager) as io4:
 
 ###################### TESTING SEGMENT ###############################################################
 
+acquisition_data = donor_file.stimulus.get('index_01')
+NeuroData_type = acquisition_data.neurodata_type
+series_name = 'index_01'
+
+output_acquisition = channel_copy_functions[NeuroData_type](nwbfile, acquisition_data, series_name, electrode)
+
+
+
+
+
+
+
 output_Acquisition = copy_VoltageClampSeries(nwbfile, Acquisition_data, 'index_000')
 print(Acquisition_data)
+
+
+
 
 
 print(ExtractedParameters['electrode'])
