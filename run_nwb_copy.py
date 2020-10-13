@@ -37,7 +37,8 @@ for series_idx, series_name in enumerate(input_series):
         correct_stim_idx += 1
         
     output_acquisition = acquisition_copy_functions[acquisition_type](nwbfile, acquisition_data, series_name, electrode)
-    output_stimulus = stimulus_copy_functions[acquisition_type](nwbfile, stimulus_data, series_name, electrode)
+    sweep_number = output_acquisition.sweep_number
+    output_stimulus = stimulus_copy_functions[acquisition_type](nwbfile, stimulus_data, series_name, electrode, sweep_number)
     
     nwbfile.add_acquisition(output_acquisition)
     nwbfile.add_stimulus(output_stimulus)
