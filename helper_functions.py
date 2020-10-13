@@ -20,10 +20,14 @@ def load_file(input_path):
     """
     io = NWBHDF5IO(input_path, 'r+')
     input_file = io.read()
-    series_list = input_file.acquisition.keys()
+    series_list = list(input_file.acquisition.keys())
     
     return input_file, series_list
 
+def save_file(output_path, nwbfile):
+    io = NWBHDF5IO(output_path, 'w')
+    io.write(nwbfile, link_data=False)
+    io.close()
 
 def clone_with_general_data(input_file):
     

@@ -53,9 +53,7 @@ for series_idx, series_name in enumerate(input_series):
      
 ##export ##############################################################
 
-io30 = NWBHDF5IO(Output_Modified_NWB_file, 'w')
-io30.write(nwbfile, link_data=False)
-io30.close()
+
 
 with NWBHDF5IO(Output_Modified_NWB_file, 'w') as io3:
     io3.write(nwbfile,link_data=False)
