@@ -33,6 +33,30 @@ def copy_VoltageClampSeries(nwbfile, input_acquisition, time_series_name, electr
 
 
 
+def copy_VoltageClampStimulusSeries(nwbfile, input_Stimulus_data, TimeSeries_name, electrode):
+
+    rawdata = input_Stimulus_data.data[:]
+    
+    
+    output_Stimulus = icph.VoltageClampStimulusSeries(
+            name = TimeSeries_name,
+            data = rawdata,
+            description = input_Stimulus_data.description,
+            comments =  input_Stimulus_data.comments,
+            conversion = input_Stimulus_data.conversion,
+            electrode = elec,
+            gain = input_Stimulus_data.gain,
+            rate = input_Stimulus_data.rate,
+            resolution = input_Stimulus_data.resolution,
+            starting_time = input_Stimulus_data.starting_time,
+            # starting_time_unit = Acquisition_data.starting_time_unit,
+            stimulus_description = input_Stimulus_data.stimulus_description,
+            sweep_number = input_Stimulus_data.sweep_number,
+            unit = input_Stimulus_data.unit,
+        )
+    return output_Stimulus
+
+
 def create_mock_electrode(nwbfile):
     device = nwbfile.create_device(name='Heka ITC-1600')
     electrode = nwbfile.create_icephys_electrode(
