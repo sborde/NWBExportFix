@@ -31,7 +31,7 @@ def copy_VoltageClampSeries(nwbfile, input_acquisition, time_series_name, electr
 
 
 
-def copy_VoltageClampStimulusSeries(nwbfile, input_stimulus, TimeSeries_name, electrode, sweep_number):
+def copy_VoltageClampStimulusSeries(nwbfile, input_stimulus, TimeSeries_name, electrode, sweep_number, starting_time):
 
     rawdata = input_stimulus.data[:]
     
@@ -45,7 +45,7 @@ def copy_VoltageClampStimulusSeries(nwbfile, input_stimulus, TimeSeries_name, el
             gain = input_stimulus.gain,
             rate = input_stimulus.rate,
             resolution = input_stimulus.resolution,
-            starting_time = input_stimulus.starting_time,
+            starting_time = starting_time,
             # starting_time_unit = input_stimulus.starting_time_unit,
             stimulus_description = input_stimulus.stimulus_description,
             sweep_number = sweep_number,
@@ -81,7 +81,7 @@ def copy_CurrentClampSeries(nwbfile, input_acquisition, TimeSeries_name, electro
     return output_Acquisition
 
 
-def copy_CurrentClampStimulusSeries(nwbfile, input_stimulus, TimeSeries_name, electrode, sweep_number):
+def copy_CurrentClampStimulusSeries(nwbfile, input_stimulus, TimeSeries_name, electrode, sweep_number, starting_time):
     
      rawdata = input_stimulus.data[:] 
      
@@ -95,7 +95,7 @@ def copy_CurrentClampStimulusSeries(nwbfile, input_stimulus, TimeSeries_name, el
             gain = input_stimulus.gain,
             rate = input_stimulus.rate,
             resolution = input_stimulus.resolution,
-            starting_time = input_stimulus.starting_time,
+            starting_time = starting_time,
             # starting_time_unit = input_stimulus.starting_time_unit,
             stimulus_description = input_stimulus.stimulus_description,
             sweep_number = sweep_number,
