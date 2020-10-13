@@ -112,8 +112,12 @@ def create_mock_electrode(nwbfile):
                     device=device)
     return electrode
 
-channel_copy_functions = {
+acquisition_copy_functions = {
     'VoltageClampSeries': copy_VoltageClampSeries,
-    'VoltageClampStimulusSeries': copy_VoltageClampStimulusSeries,
-    'CurrentClampSeries': copy_CurrentClampSeries,
-    'CurrentClampStimulusSeries': copy_CurrentClampStimulusSeries}
+    'CurrentClampSeries': copy_CurrentClampSeries
+    }
+
+stimulus_copy_functions = {
+    'VoltageClampSeries': copy_VoltageClampStimulusSeries,
+    'CurrentClampSeries': copy_CurrentClampStimulusSeries    
+    }
