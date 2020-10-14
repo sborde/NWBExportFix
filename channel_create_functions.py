@@ -31,14 +31,15 @@ def copy_VoltageClampSeries(nwbfile, input_acquisition, time_series_name, electr
 
 
 
-def copy_VoltageClampStimulusSeries(nwbfile, input_stimulus, TimeSeries_name, electrode, sweep_number, starting_time):
+def copy_VoltageClampStimulusSeries(nwbfile, acquisition, input_stimulus, TimeSeries_name, electrode, sweep_number, starting_time):
 
     rawdata = input_stimulus.data[:]
+    
     
     output_Stimulus = icph.VoltageClampStimulusSeries(
             name = TimeSeries_name,
             data = rawdata,
-            description = input_stimulus.description,
+            description = acquisition.description,
             comments =  input_stimulus.comments,
             conversion = input_stimulus.conversion,
             electrode = electrode,
@@ -81,16 +82,18 @@ def copy_CurrentClampSeries(nwbfile, input_acquisition, TimeSeries_name, electro
     return output_Acquisition
 
 
-def copy_CurrentClampStimulusSeries(nwbfile, input_stimulus, TimeSeries_name, electrode, sweep_number, starting_time):
+def copy_CurrentClampStimulusSeries(nwbfile, acquisition, input_stimulus, TimeSeries_name, electrode, sweep_number, starting_time):
     
      rawdata = input_stimulus.data[:] 
+     
+     #input_stimulus.description['cycle_id'] = sweep_number
      
      output_Acquisition = icph.CurrentClampStimulusSeries(
             name = TimeSeries_name,
             data = rawdata,
             comments =  input_stimulus.comments,
             conversion = input_stimulus.conversion,
-            description = input_stimulus.description,
+            description = acquisition.description,
             electrode = electrode,
             gain = input_stimulus.gain,
             rate = input_stimulus.rate,
