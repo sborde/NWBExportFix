@@ -18,11 +18,11 @@ def load_file(input_path):
         list of series found in the NWB file
 
     """
-    io = NWBHDF5IO(input_path, 'r+')
+    io = NWBHDF5IO(input_path, 'r')
     input_file = io.read()
     series_list = list(input_file.acquisition.keys())
     
-    return input_file, series_list
+    return input_file, io, series_list
 
 def save_file(output_path, nwbfile):
     io = NWBHDF5IO(output_path, 'w')

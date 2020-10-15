@@ -10,8 +10,8 @@ output_filename = 'output_test_file.nwb'
 donor_series_idx = [1, 2, 3, 26, 27]
 replace_series_idx = [1, 2, 3, 40, 53]
 
-input_file, input_series = load_file(base_dir + input_filename)
-donor_file, donor_series = load_file(base_dir + donor_filename)
+input_file, i_io, input_series = load_file(base_dir + input_filename)
+donor_file, d_io, donor_series = load_file(base_dir + donor_filename)
 
 nwbfile = clone_with_general_data(input_file)
 electrode = create_mock_electrode(nwbfile)
@@ -45,3 +45,5 @@ for series_idx, series_name in enumerate(input_series):
     nwbfile.add_stimulus(output_stimulus)
     
 save_file(base_dir + output_filename, nwbfile)
+i_io.close()
+d_io.close()
