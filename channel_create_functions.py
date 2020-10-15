@@ -31,7 +31,7 @@ def copy_VoltageClampSeries(nwbfile, input_acquisition, time_series_name, electr
 
 
 
-def copy_VoltageClampStimulusSeries(nwbfile, acquisition, input_stimulus, TimeSeries_name, electrode, sweep_number, starting_time):
+def copy_VoltageClampStimulusSeries(nwbfile, input_acquisition, input_stimulus, TimeSeries_name, electrode):
 
     rawdata = input_stimulus.data[:]
     
@@ -39,17 +39,17 @@ def copy_VoltageClampStimulusSeries(nwbfile, acquisition, input_stimulus, TimeSe
     output_Stimulus = icph.VoltageClampStimulusSeries(
             name = TimeSeries_name,
             data = rawdata,
-            description = acquisition.description,
-            comments =  input_stimulus.comments,
+            description = input_acquisition.description,
+            comments =  input_acquisition.comments,
             conversion = input_stimulus.conversion,
             electrode = electrode,
             gain = input_stimulus.gain,
             rate = input_stimulus.rate,
             resolution = input_stimulus.resolution,
-            starting_time = starting_time,
+            starting_time = input_acquisition.starting_time,
             # starting_time_unit = input_stimulus.starting_time_unit,
             stimulus_description = input_stimulus.stimulus_description,
-            sweep_number = sweep_number,
+            sweep_number = input_acquisition.sweep_number,
             unit = input_stimulus.unit,
         )
     return output_Stimulus
@@ -82,26 +82,24 @@ def copy_CurrentClampSeries(nwbfile, input_acquisition, TimeSeries_name, electro
     return output_Acquisition
 
 
-def copy_CurrentClampStimulusSeries(nwbfile, acquisition, input_stimulus, TimeSeries_name, electrode, sweep_number, starting_time):
+def copy_CurrentClampStimulusSeries(nwbfile, input_acquisition, input_stimulus, TimeSeries_name, electrode):
     
      rawdata = input_stimulus.data[:] 
-     
-     #input_stimulus.description['cycle_id'] = sweep_number
      
      output_Acquisition = icph.CurrentClampStimulusSeries(
             name = TimeSeries_name,
             data = rawdata,
-            comments =  input_stimulus.comments,
+            comments =  input_acquisition.comments,
             conversion = input_stimulus.conversion,
-            description = acquisition.description,
+            description = input_acquisition.description,
             electrode = electrode,
             gain = input_stimulus.gain,
             rate = input_stimulus.rate,
             resolution = input_stimulus.resolution,
-            starting_time = starting_time,
+            starting_time = input_acquisition.starting_time,
             # starting_time_unit = input_stimulus.starting_time_unit,
             stimulus_description = input_stimulus.stimulus_description,
-            sweep_number = sweep_number,
+            sweep_number = input_acquisition.sweep_number,
             unit = input_stimulus.unit,
          )
      return output_Acquisition
